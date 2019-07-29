@@ -34,15 +34,6 @@
 		if ( !current_user_can( 'manage_options' ) )  {
 			wp_die( __( 'You do not have permisson!' ) );
 		}
-		
-/** Fetch datas from wordpress database */
-global $wpdb;
-$querystr = "SELECT * FROM $wpdb->posts WHERE $wpdb->posts.post_type = 'post'";
-
-$pageposts = $wpdb->get_results($querystr, OBJECT);
-
-var_dump($pageposts);
-		
 		echo'<form name="form" action="" method="GET">
 			Number <input type="number" id="postnumber" name="postnumber"><br>
 			<input type="submit" value="Submit">
@@ -52,5 +43,20 @@ var_dump($pageposts);
 
 		$count_posts = wp_count_posts( );
 		var_dump($count_posts);
+
+/** Fetch and store datas from wordpress database */
+		global $wpdb;
+		$querystr = "SELECT * FROM $wpdb->posts WHERE $wpdb->posts.post_type = 'post'";
+
+		$pageposts = $wpdb->get_results($querystr, OBJECT);
+
+		var_dump($pageposts);
+	
 	}
+/** Next steps:
+ * 1. ORDERing the posts in DESC by date.
+ * 2. Get the latest x number of posts by set input value to $querystr.
+ * 3. Creating a shortcode of posts.
+ * 4. displaying the shortcodes.
+ */
 	?>
